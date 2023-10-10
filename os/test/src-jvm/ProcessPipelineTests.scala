@@ -27,6 +27,9 @@ object ProcessPipelineTests extends TestSuite {
 
   val commonTests = Tests {
     test("pipelineCall") {
+      // Warm up
+      Try(os.proc(writerProc(10,10)).call(timeout = 20000))
+      Try(os.proc(readerProc(10,10)).call(timeout = 20000))
       val resultLines = os.proc(writerProc(10, 10))
         .pipeTo(os.proc(readerProc(10, 10)))
         .call().out.lines().toSeq
