@@ -16,7 +16,7 @@ object ProcessPipelineTests extends TestSuite {
   def isWindows = System.getProperty("os.name").toLowerCase().contains("windows")
 
   def scriptProc(name: String, args: String*): Seq[String] =
-    Seq("scala-cli" + (if(isWindows) ".exe" else ""), (scriptFolder / name).toString(), "--") ++ args.toSeq
+    Seq("scala-cli" + (if(isWindows) ".bat" else ""), (scriptFolder / name).toString(), "--") ++ args.toSeq
 
   def writerProc(n: Int, wait: Int, debugOutput: Boolean = true): Seq[String] =
     scriptProc("writer.scala", n.toString, wait.toString, debugOutput.toString)
