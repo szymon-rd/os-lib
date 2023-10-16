@@ -111,7 +111,9 @@ object ProcessPipelineTests extends TestSuite {
         .spawn(pipefail = true)
 
       p.waitFor()
-      assert(p.exitCode() == 213)
+      println("EXIT CODE " + p.exitCode())
+      val e = p.exitCode()
+      assert(e == 213)
     }
   }
 
