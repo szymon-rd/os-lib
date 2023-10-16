@@ -106,14 +106,12 @@ object ProcessPipelineTests extends TestSuite {
 
     test("pipelineWithPipefail") {
       val p = os.proc(exitProc(0, 300))
-        .pipeTo(os.proc(exitProc(213, 100)))
+        .pipeTo(os.proc(exitProc(1, 100)))
         .pipeTo(os.proc(exitProc(0, 400)))
         .spawn(pipefail = true)
 
       p.waitFor()
-      println("EXIT CODE " + p.exitCode())
-      val e = p.exitCode()
-      assert(e == 213)
+      assert(p.exitCode() == 1)
     }
   }
 
